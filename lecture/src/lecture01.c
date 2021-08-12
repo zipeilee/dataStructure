@@ -1,7 +1,7 @@
 /* 
  * lectrue 1 demo 
  * 最大子列求和
- * zipei @ 2021/08/11
+ * creat by zipei on 2021/8/11
  */ 
  
 #include<stdio.h>
@@ -61,38 +61,38 @@ int DivideAndConquer(int List[], int left, int right)
     int center, i;
 
     /* 递归的终止条件，子列只有1个数字 */
-    if ( left == right ) {
-        if ( List[left] > 0 )
+    if (left == righ){
+        if (List[left] > 0)
             return List[left];
         else return 0;
     }
 
-    center = ( left + right ) / 2;    /* 找到中分点 */
-    MaxLeftSum = DivideAndConquer ( List, left, center );    /* 递归求左子列和 */
-    MaxRightSum = DivideAndConquer ( List, center+1, right );    /* 递归求右子列和 */
+    center = (left + right) / 2;    /* 找到中分点 */
+    MaxLeftSum = DivideAndConquer(List, left, center);    /* 递归求左子列和 */
+    MaxRightSum = DivideAndConquer(List, center+1, right);    /* 递归求右子列和 */
 
     /* 求跨分界线的最大子列和 */
     MaxLeftBorderSum = 0;	LeftBorderSum = 0;
-    for ( i = center; i >= left; i-- ) {              /* 左边扫描结束 */
+    for (i=center; i>=left; i--){              /* 左边扫描结束 */
         LeftBorderSum += List[i];
         if ( LeftBorderSum > MaxLeftBorderSum )
             MaxLeftBorderSum = LeftBorderSum;
     }
 
     MaxRightBorderSum = 0;	RightBorderSum = 0;
-    for ( i = center+1; i <= right; i++ ) {           /* 左边扫描结束 */
+    for (i=center+1; i<=right; i++){           /* 右边扫描结束 */
         RightBorderSum += List[i];
-        if ( RightBorderSum > MaxRightBorderSum )
+        if (RightBorderSum > MaxRightBorderSum)
             MaxRightBorderSum = RightBorderSum;
     }
 
     /* 返回三个结果最大值 */
-    return Max3( MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum );
+    return Max3(MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum);
 
 }
 
-int MaxSubArray3 ( int List[], int N ) {
-    return DivideAndConquer ( List, 0, N-1 );
+int MaxSubArray3 (int List[], int N){
+    return DivideAndConquer (List, 0, N-1);
 }
 
 /*
@@ -126,7 +126,7 @@ int main(){
     start = clock();
     MaxSubArray1(a,n);    /*  修改函数名 测试不同函数所花时间 */
     end = clock();
-    double delta_t = (double ) (end-start)/10000;
-    printf("time=%f\n",delta_t);
+    double delta_t = (double) (end-start)/10000;
+    printf("time=%f\n",  delta_t);
     return 0;
 }
